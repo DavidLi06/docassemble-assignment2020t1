@@ -1,6 +1,6 @@
 # ASSIGNMENT 1
 # You will be implementing the Legal Aid Bureau's interview to determine
-# whether an applicant is eligible for legal aid. 
+# whether an applicant is eligible for legal aid.
 # The total score that can be awarded for this assignment is 20.
 # The reference interview is found here:
 # https://guided.page/interview?i=docassemble.playground3%3Alab.yml#page1
@@ -14,9 +14,9 @@ metadata:
   title: |
     LAB Means Test
   short title: |
-    online interview
+    Online Interview
   description: |
-    Online internview for LAB Means Test
+    Online Interview for LAB Means Test
   authors:
     - name: David Li
       organization: COR-LAW-2215 Digital Intelligence for Lawyers
@@ -43,7 +43,7 @@ objects:
 ---
 # MODIFY THIS BLOCK (BUT DO NOT MOVE IT). SCORE: 5
 # Use this block to control the interview logic.
-# Include this line somewhere in your code: 
+# Include this line somewhere in your code:
 #   household_members.append(applicant)
 # This line of code adds the applicant to the household_members DAList.
 # This ensures that the applicant appears in the household_members.table.
@@ -56,12 +56,12 @@ code: |
      not_qualified
    if annual_value > 13000:
      not_qualified
-  
+
 
  if applicant.age_in_years() > 60:
    if savingsandinvest > 40000:
      not_qualified
- 
+
  if applicant.age_in_years() <= 60:
    if savingsandinvest > 10000:
      not_qualified
@@ -69,7 +69,7 @@ code: |
  household_members.append(applicant)
 ---
 question: Do you own any property?
-fields: 
+fields:
  - no label: owns_property
    datatype: yesnoradio
 
@@ -78,13 +78,13 @@ question: Property Information
 fields:
   - Do you own more than one property?: multi_property
     datatype: yesnoradio
-    
+
   - Do you currently reside in this property?: reside_property
     datatype: yesnoradio
-    show if: 
+    show if:
      variable: multi_property
      is: False
-     
+
   - What is the annual value of your residential property?: annual_value
     datatype: currency
     min: 0
@@ -99,7 +99,7 @@ fields:
     datatype: date
   - How much total savings and non-CPF investments do you have?: savingsandinvest
     datatype: number
-    help: This value is calculated by adding up your bank account savings, overall value of your shares and any other financial/investment products with a cash value that you own. 
+    help: This value is calculated by adding up your bank account savings, overall value of your shares and any other financial/investment products with a cash value that you own.
 
 ---
 question: |
@@ -126,7 +126,7 @@ fields:
 event: not_qualified
 question: Sorry, you do not qualify for Legal Aid
 subquestion: |
-  If you have certain reasons or information that you think makes your     situation different or special, for example if you have a serious illness and cannot afford legal services as you need to pay for major medical procedures, [click here](https://www.mlaw.gov.sg/about-us/contact-us/) to contact the MinLaw Services Centre for further assistance. 
+  If you have certain reasons or information that you think makes your     situation different or special, for example if you have a serious illness and cannot afford legal services as you need to pay for major medical procedures, [click here](https://www.mlaw.gov.sg/about-us/contact-us/) to contact the MinLaw Services Centre for further assistance.
 buttons:
  - Exit: leave
  - Restart: restart
@@ -136,9 +136,9 @@ event: yes_qualified
 question: You qualify for Legal Aid
 subquestion: |
   You have passed the Means Test. We will contact you shortly.
-  
-  In the next step, you will be given an appointment for Statement Taking. You will be interviewed by a Legal Executive from Legal Aid Bureau (LAB) who will ask you questions about your case. You should provide LAB with the full facts of your case as well as all the relevant documents/evidence. This helps LAB to investigate your case and assess whether legal aid should be granted to you. 
-  
+
+  In the next step, you will be given an appointment for Statement Taking. You will be interviewed by a Legal Executive from Legal Aid Bureau (LAB) who will ask you questions about your case. You should provide LAB with the full facts of your case as well as all the relevant documents/evidence. This helps LAB to investigate your case and assess whether legal aid should be granted to you.
+
 buttons:
  - Exit: leave
  - Restart: restart
@@ -157,21 +157,21 @@ code: |
  total_income = 0
  for m in household_members:
    total_income += m.income
- 
+
  pchi = total_income/len(household_members)/12
- 
+
  if pchi <= 950:
    yes_qualified
 
  else:
    not_qualified
-  
+
 
 ---
 # DO NOT MODIFY THIS BLOCK
 table: household_members.table
 rows: household_members
-columns: 
+columns:
   - Name: row_item
   - Birthdate: row_item.birthdate
   - Income: row_item.income
@@ -179,21 +179,21 @@ edit:
   - name.first
 ---
 # DO NOT MODIFY THIS BLOCK
-question: | 
+question: |
   Please add all other household members.
 subquestion: |
   A household member is any person residing with you and related by:
-  
+
   1. blood
   2. marriage; or
   3. adoption.
-  
+
   Press continue when you have added all household members.
-  
+
   ${household_members.table}
 
   ${household_members.add_action() }
-  
+
 field: review_household_members
 ---
 # DO NOT MODIFY THIS BLOCK
